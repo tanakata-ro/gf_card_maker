@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <title>ごっふぃーカードメーカー</title>
+</head>
+<body class="m">
+    <div id="g_cards">
+        <div class="card_base" id="card_base0">
+            <div class="card_image_base">
+                <input type="file" id="ui0" accept="image/jpeg, image/png" onchange="preview(this, 0)" style="display:none">
+                <img id="pi0" src="./images/new.png" class="card_image" onclick="upload_image(0)">
+            </div>
+            <div class="card_txt_base">
+                <div class="card_name_base">
+                    <p id="na0"></p>
+                </div>
+                <div class="card_ex_base">
+                    <div class="f-row">
+                        <img id="ai0" class="attr_img" src="./images/empty.png">
+                        <p id="pls0" class="pls"></p>
+                        <p id="status0" class="pls">攻</p>
+                        <p id="aif0" class="aif">1</p>
+                    </div>
+                    <div class="s-row">
+                        <p id="ais0" class="ais" style="margin: 0 0 0 1mm;"></p>
+                    </div>
+                    <div class="money-mp-cell">
+                        <div class="money-circle" id="money-c0">
+                            <p id="money0">¥1</p>
+                        </div>
+                        <div class="mp-box" id="mp-box0" style="display: none;">
+                            <p>消費</p>
+                            <p id="con-mp0">MP1</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="print_none" id="print_none0">
+            <label for="type0">種類:</label>
+            <select name="type0" id="t0" onchange="select_change(0)">
+                <option value="0">武器</option>
+                <option value="1">防具</option>
+                <option value="2">取引</option>
+                <option value="3">雑貨(HP)</option>
+                <option value="4">雑貨(MP)</option>
+                <option value="5">雑貨(その他)</option>
+                <option value="6">奇跡(攻撃)</option>
+                <option value="7">奇跡(異常)</option>
+                <option value="8">奇跡(HP)</option>
+                <option value="9">奇跡(MP)</option>
+                <option value="10">奇跡(¥)</option>
+                <option value="11">奇跡(その他)</option>
+                <option value="12">守護神</option>
+                <option value="13">超常現象(攻撃)</option>
+                <option value="14">超常現象(異常)</option>
+                <option value="15">超常現象(HP)</option>
+                <option value="16">超常現象(MP)</option>
+                <option value="17">超常現象(¥)</option>
+                <option value="18">超常現象(その他)</option>
+            </select>
+            <label for="attribute0" class="hi00">属性:</label>
+            <select name="attribute0" class="hi00" id="a0" onchange="attr_change(0)">
+                <option value="0">無</option>
+                <option value="1">火</option>
+                <option value="2">水</option>
+                <option value="3">木</option>
+                <option value="4">土</option>
+                <option value="5">光</option>
+                <option value="6">闇</option>
+            </select><br>
+            <div class="inf">
+                <label for="name0">名前:</label>
+                <input type="text" min="1" name="name0" id="name0" onchange="name_change(0)">
+            </div><br>
+            <label for="odds0" class="hi01">確率:</label>
+            <select name="odds0" class="hi01" id="o0" onchange="change_odds(0)">
+                <option value="100">100</option>
+                <option value="75">75</option>
+                <option value="50">50</option>
+                <option value="25">25</option>
+            </select>
+            <div class="hi02 inf">
+                <label for="addp0">+</label>
+                <input type="checkbox" name="addp0" id="addp0" onchange="change_pls(0)">
+                <label for="power0">攻撃力:</label>
+                <input type="number" min="1"name="power0" value="1" id="power0" onchange="change_amount(0, 'power')">
+            </div>
+            <div class="hi03 inf" style="display: none;">
+                <label for="addd0">+</label>
+                <input type="checkbox" name="addd0" id="addd0" onchange="change_pls(0)">
+                <label for="defence0">防御力:</label>
+                <input type="number" min="1"name="defence0"  value="1" id="defence0" onchange="change_amount(0, 'defence')">
+            </div>
+            <div class="hi04 inf" style="display: none;">
+                <label for="effect0">主な効果:</label>
+                <select name="effect0" id="e0" onchange="effect_change(0)">
+                    <option value="-1">-</option>
+                    <option value="0">風邪</option>
+                    <option value="1">熱病</option>
+                    <option value="2">地獄病</option>
+                    <option value="3">天国病</option>
+                    <option value="4">霧</option>
+                    <option value="5">閃光</option>
+                    <option value="6">夢</option>
+                    <option value="7">暗雲</option>
+                </select>
+            </div>
+            <div class="hi05 inf" style="display: none;">
+                <label for="ahp0">回復量(HP):</label>
+                <input type="number" min="1" name="ahp0" value="1" id="ahp0" onchange="change_amount(0, 'ahp')">
+            </div>
+            <div class="hi06 inf" style="display: none;">
+                <label for="amp0">回復量(MP):</label>
+                <input type="number" min="1"name="amp0" value="1" id="amp0" onchange="change_amount(0, 'amp')">
+            </div>
+            <div class="hi07 inf" style="display: none;">
+                <label for="am0">回復量(¥):</label>
+                <input type="number" min="1"name="am0" value="1" id="am0" onchange="change_amount(0, 'am')">
+            </div>
+            <div class="hi08 inf" style="display: none;">
+                <label for="fdescribe0">説明:</label>
+                <input type="text" name="fdescribe0" id="fdescribe0" onchange="change_amount(0, 'fdescribe')">
+            </div>
+            <div class="hi09 inf" style="">
+                <label for="sdescribe0">説明(2行目):</label>
+                <input type="text" name="sdescribe0" id="sdescribe0" onchange="exs_change(0)">
+            </div>
+            <div class="hi010 inf">
+                <label for="price0">料金:</label>
+                <input type="number" min="1"name="price0" value="1" id="price0" onchange="mon_change(0)">
+            </div>
+            <div class="hi011 inf" style="display: none;">
+                <label for="mp0">消費MP:</label>
+                <input type="number" min="1"name="mp0" value="1" id="mp0" onchange="mp_change(0)">
+            </div>
+            <div class="hi012 inf" style="display: none;">
+                <label for="tc0">テキストカラー:</label>
+                <select name="tc0" id="c0" onchange="select_change_tc(0)">
+                    <option value="0">無</option>
+                    <option value="1">火</option>
+                    <option value="2">水</option>
+                    <option value="3">木</option>
+                    <option value="4">土</option>
+                    <option value="5">光</option>
+                    <option value="6">闇</option>
+                    <option value="7">暖流</option>
+                    <option value="8">金山</option>
+                    <option value="9">磁気嵐</option>
+                    <option value="10">日食</option>
+                    <option value="-1">その他</option>
+                </select>
+                <input type="color" value="#000000" id="cl0" style="display: none;" onchange="select_change_tc(0)">
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
